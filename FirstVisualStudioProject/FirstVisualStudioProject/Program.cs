@@ -1,14 +1,16 @@
-﻿
-//  #1
-// Console.WriteLine("You are a n00b");
+﻿using System;
 
-
-
-//  #2
-var testVar = "You are a n00b!";
-
-Console.WriteLine(testVar);
-
+namespace tutorial01
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+            Console.ReadLine();
+        }
+    }
+}
 
 
 
