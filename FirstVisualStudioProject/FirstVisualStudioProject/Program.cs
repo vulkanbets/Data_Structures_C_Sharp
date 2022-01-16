@@ -1,7 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
+//  #1
+// Console.WriteLine("You are a n00b");
 
 
-// These are my comments
-Console.WriteLine("Hello, World!");
+
+//  #2
+var testVar = "You are a n00b!";
+
+Console.WriteLine(testVar);
+
+
 
 
