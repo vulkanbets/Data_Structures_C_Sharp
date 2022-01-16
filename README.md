@@ -1,1 +1,1 @@
-## Data Structures and Algorithms using C# and Visual Studio 2022
+## Data Structures and Algorithms using C# .NET and Visual Studio 2022
