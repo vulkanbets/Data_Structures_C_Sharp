@@ -39,14 +39,27 @@ namespace FirstVisualStudioProject
                 // copying old array elements to new array
                 for(int i = 0; i < arr.Length; i++)
                     { temp[i] = arr[i]; }
-                // Clear previous array
-                Array.Clear(arr, 0, arr.Length);
+                // Assign old array to new array
                 arr = temp;
             }
             // Insert data into the last element
             arr[current] = data;
             current++;
         }
+
+
+
+        // function to add element at any index
+        void push(int data, int index)
+        {
+            // if index is equal to capacity then this
+            // function is same as push defined above
+            //if (index == capacity)
+            //    push(data);
+            //else
+            //    arr[index] = data;
+        }
+
 
 
 
