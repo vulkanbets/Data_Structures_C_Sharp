@@ -27,6 +27,19 @@ namespace FirstVisualStudioProject
         }
 
 
+
+
+
+        // function to get size of the vector
+        public int size() { return current; }
+
+        // function to get capacity of the vector
+        public int getcapacity() { return capacity; }
+
+
+
+
+
     }
 }
 
