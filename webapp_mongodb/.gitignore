@@ -1,0 +1,9 @@
+
+
+*.sln
+
+/*/*
+!/webapp_mongodb/MainWindow.xaml
+
+
+

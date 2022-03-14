@@ -38,6 +38,17 @@
             </TextBlock.Foreground>
         </TextBlock>
 
+        <TextBlock Grid.Column="2" Grid.Row="2" FontSize="36"
+                   Text="Happy Valentine's Day!"
+                   OpacityMask="#FF5E988E" Background="#FF7025AC">
+            <TextBlock.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF123DAE" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+        </TextBlock>
+
     </Grid>
 </Window>
 
