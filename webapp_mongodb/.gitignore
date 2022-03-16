@@ -2,7 +2,6 @@
 *.sln
 
 /*/*
-!/webapp_mongodb/MainWindow.xaml
 
 !/webapp_mongodb/Views/
 !/webapp_mongodb/ViewModel/
