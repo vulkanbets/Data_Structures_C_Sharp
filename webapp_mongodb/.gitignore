@@ -6,6 +6,9 @@
 !/webapp_mongodb/Views/
 !/webapp_mongodb/ViewModel/
 !/webapp_mongodb/Model/
+!/webapp_mongodb/App.xaml
+!/webapp_mongodb/App.xaml.cs
+
 
 
 
