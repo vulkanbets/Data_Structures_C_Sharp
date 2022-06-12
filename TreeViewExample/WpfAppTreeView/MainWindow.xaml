@@ -6,7 +6,19 @@
         xmlns:local="clr-namespace:WpfAppTreeView"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.30*"/>
+            <ColumnDefinition Width="0.70*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.20*"/>
+            <RowDefinition Height="0.60*"/>
+            <RowDefinition Height="0.20*"/>
+        </Grid.RowDefinitions>
+        
+        
         
     </Grid>
 </Window>

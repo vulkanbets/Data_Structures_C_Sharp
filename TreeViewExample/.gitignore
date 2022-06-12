@@ -7,4 +7,4 @@
 !/WpfAppTreeView/MainWindow.xaml.cs
 !/WpfAppTreeView/WpfAppTreeViewModel.cs
 !/WpfAppTreeView/App.xaml
-
+!/WpfAppTreeView/App.xaml.cs
