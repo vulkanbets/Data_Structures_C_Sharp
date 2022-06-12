@@ -1,0 +1,10 @@
+
+*.sln
+
+/*/*
+
+!/WpfAppTreeView/MainWindow.xaml
+!/WpfAppTreeView/MainWindow.xaml.cs
+!/WpfAppTreeView/WpfAppTreeViewModel.cs
+!/WpfAppTreeView/App.xaml
+
