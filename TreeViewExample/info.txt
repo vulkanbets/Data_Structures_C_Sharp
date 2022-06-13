@@ -1,0 +1,6 @@
+check these sites for more info
+
+https://wpf-tutorial.com/treeview-control/simple-treeview/
+https://stackoverflow.com/questions/2251260/how-to-develop-treeview-with-checkboxes-in-wpf
+https://www.c-sharpcorner.com/article/populating-hierarchical-data-in-treeview-in-wpf-using-mvvm/
+

@@ -13,7 +13,7 @@ namespace WpfAppTreeView
             WpfAppTreeViewModel VM = new WpfAppTreeViewModel();
 
             // Show View Window through ViewModel
-            VM.showWindow();
+            VM.showView();
         }
     }
 }
