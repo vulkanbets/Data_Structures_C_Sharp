@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppTreeView"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        Height="450" Width="800"
+        MinHeight="250" MinWidth="425">
 
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
@@ -24,12 +25,6 @@
         <!-- TreeView inside DockPanel -->
         <DockPanel Grid.Row="1" Grid.Column="0">
             <TreeView>
-                
-                
-                
-                
-                
-
             </TreeView>
         </DockPanel>
         
@@ -39,7 +34,7 @@
         <!-- Button -->
         <Button Grid.Row="1" Grid.Column="1"
                 Content="Copy to Image"
-                Margin="200 110"/>
+                Height="30" Width="100"/>
 
 
     </Grid>

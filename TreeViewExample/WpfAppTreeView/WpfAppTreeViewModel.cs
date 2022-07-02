@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace WpfAppTreeView
 {
@@ -25,7 +20,6 @@ namespace WpfAppTreeView
             // Show the window
             _view.Show();
         }
-
     }
 
 
@@ -33,6 +27,68 @@ namespace WpfAppTreeView
 
 
 
+
+
+
+
+
+
+
+
+
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    public class City : ViewModelBase
+    {
+        private string _strCityName = string.Empty;
+        public string CityName
+        {
+            get
+            {
+                return _strCityName;
+            }
+            set
+            {
+                _strCityName = value;
+                OnPropertyChanged("CityName");
+            }
+        }
+
+        public City(string cityname)
+        {
+            CityName = cityname;
+        }
+    }
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
     // ViewModel Base class.  ViewModel Inherits from this class
     public class ViewModelBase : INotifyPropertyChanged
     {
@@ -45,7 +101,9 @@ namespace WpfAppTreeView
                 PropertyChanged(this, new PropertyChangedEventArgs(propname));
             }
         }
-
     }
-
+    // ViewModel Base class.  ViewModel Inherits from this class
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
+    //-----------------------------------------------------------
 }
