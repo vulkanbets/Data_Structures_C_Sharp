@@ -65,10 +65,10 @@ namespace WpfAppTreeView
             }
 
 
-            var tempCities = new List<City>();
+            
             foreach (var itemState in statesList)
             {
-                tempCities.Clear();
+                var tempCities = new List<City>();
                 foreach (var itemTree in _myTreeItems)
                 {
                     if (itemState.StateName  ==  itemTree.Item1.StateName)
@@ -76,17 +76,9 @@ namespace WpfAppTreeView
                         tempCities.Add(itemTree.Item2);
                     }
                 }
+
                 _myTreeDataStruct?.Add(new Tuple<State, List<City>>(itemState, tempCities));
             }
-
-
-
-
-
-
-
-
-
 
         }
     }

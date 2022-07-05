@@ -9,56 +9,52 @@ namespace WpfAppTreeView
 {
     public class WpfAppTreeViewModel : ViewModelBase
     {
+        //--------------
         // Constructor
         public WpfAppTreeViewModel()
         {
-            _treeViewItemsList = new TreeViewDataStruct();
-            _treeViewItemsList.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("San Diego")) );
-            _treeViewItemsList.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("Sacramento")) );
-            _treeViewItemsList.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("Carlsbad")) );
-            _treeViewItemsList.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Orlando")) );
-            _treeViewItemsList.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Miami")) );
-            _treeViewItemsList.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Jacksonville")) );
-            _treeViewItemsList.MyTreeItems?.Add( new Tuple<State, City>(new State("North Carolina"), new City("Raleigh")) );
-            _treeViewItemsList.MyTreeItems?.Add( new Tuple<State, City>(new State("North Carolina"), new City("Jacksonville")) );
+            _treeViewItemsStruct = new TreeViewDataStruct();
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("San Diego")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("Sacramento")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("Carlsbad")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Orlando")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Miami")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Jacksonville")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("North Carolina"), new City("Raleigh")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("North Carolina"), new City("Jacksonville")) );
 
             // Create the TreeView Data Structure
-            _treeViewItemsList.CompileTreeStructure();
+            _treeViewItemsStruct.CompileTreeStructure();
 
 
-            //MenuItem root = new MenuItem() { Title = "Menu" };
-            //MenuItem childItem1 = new MenuItem() { Title = "Child item #1" };
-            //childItem1.Items.Add(new MenuItem() { Title = "Child item #1.1" });
-            //childItem1.Items.Add(new MenuItem() { Title = "Child item #1.2" });
-            //root.Items.Add(childItem1);
-            //root.Items.Add(new MenuItem() { Title = "Child item #2" });
-            //trvMenu.Items.Add(root);
+            // Print-out test variables to see test functionality
+            //Task.Run(() =>
+            //{
+            //    while (true)
+            //    {
+            //        if (_treeViewItemsStruct.MyTreeItems != null)
+            //        {
+            //            Trace.WriteLine("\n");
+            //            foreach (var itemState in _treeViewItemsStruct.MyTreeDataStruct)
+            //            {
+            //                Trace.WriteLine("");
+            //                Trace.Write(itemState.Item1.StateName);
+            //                foreach (var itemCity in itemState.Item2)
+            //                {
+            //                    Trace.WriteLine("");
+            //                    Trace.Write(" |-- ");
+            //                    Trace.Write(itemCity.CityName);
+            //                }
+            //            }
+            //            Trace.WriteLine("\n");
+            //        }
 
-            Task.Run(() =>
-            {
-                while (true)
-                {
-                    if (_treeViewItemsList.MyTreeItems != null)
-                    {
-                        Trace.WriteLine("\n");
-                        foreach (var itemState in _treeViewItemsList.MyTreeDataStruct)
-                        {
-                            Trace.WriteLine("");
-                            Trace.Write(itemState.Item1.StateName);
-                            foreach (var itemCity in itemState.Item2)
-                            {
-                                Trace.WriteLine("");
-                                Trace.Write(" |-- ");
-                                Trace.Write(itemCity.CityName);
-                            }
-                        }
-                        Trace.WriteLine("\n");
-                    }
-
-                    Thread.Sleep(1250);
-                }
-            });
+            //        Thread.Sleep(1250);
+            //    }
+            //});
         }
+        // End Constructor
+        //-----------------
 
         // View
         private MainWindow? _view;
@@ -77,13 +73,13 @@ namespace WpfAppTreeView
             _view.Show();
         }
 
-        private TreeViewDataStruct? _treeViewItemsList;
-        public TreeViewDataStruct? TreeViewItemsList
+        private TreeViewDataStruct? _treeViewItemsStruct;
+        public TreeViewDataStruct? TreeViewItemsStruct
         {
-            get => _treeViewItemsList;
+            get => _treeViewItemsStruct;
             set
             {
-                _treeViewItemsList = value;
+                _treeViewItemsStruct = value;
                 OnPropertyChanged("TreeViewItemsList");
             }
         }

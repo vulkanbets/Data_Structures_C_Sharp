@@ -25,11 +25,14 @@
         <!-- TreeView inside DockPanel -->
         <DockPanel Grid.Row="1" Grid.Column="0">
             <TreeView>
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate>
-                        <TextBlock/>
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type local:WpfAppTreeViewModel}" ItemsSource="{Binding TreeViewItemsStruct}">
+                        <!--<TextBlock Text="{Binding Path=}" />-->
                     </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:TreeViewDataStruct}" >
+                        <!--<TextBlock Text="{Binding Path=Name}" />-->
+                    </DataTemplate>
+                </TreeView.Resources>
             </TreeView>
         </DockPanel>
         
