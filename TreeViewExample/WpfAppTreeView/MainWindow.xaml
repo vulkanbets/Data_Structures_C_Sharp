@@ -25,6 +25,11 @@
         <!-- TreeView inside DockPanel -->
         <DockPanel Grid.Row="1" Grid.Column="0">
             <TreeView>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate>
+                        <TextBlock/>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
             </TreeView>
         </DockPanel>
         

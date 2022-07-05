@@ -8,5 +8,5 @@
 !/WpfAppTreeView/WpfAppTreeViewModel.cs
 !/WpfAppTreeView/App.xaml
 !/WpfAppTreeView/App.xaml.cs
-!/WpfAppTreeView/Point.cs
+!/WpfAppTreeView/Model.cs
 
