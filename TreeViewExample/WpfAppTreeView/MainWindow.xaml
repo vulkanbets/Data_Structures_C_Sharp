@@ -28,16 +28,22 @@
         
         <!-- TreeView inside DockPanel -->
         <DockPanel Grid.Row="1" Grid.Column="0">
-            <TreeView ItemsSource="{Binding Records, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <TreeView ItemsSource="{Binding Records}">
 
                 <TreeView.Resources>
 
                     <HierarchicalDataTemplate DataType = "{x:Type local:ActualTreeViewRecord}" ItemsSource="{Binding CitiesSubRecords}">
-                        <TextBlock Text="{Binding Path=StateRecord.StateName}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox/>
+                            <TextBlock Text="{Binding Path=StateRecord.StateName}"/>
+                        </StackPanel>
                     </HierarchicalDataTemplate>
 
                     <DataTemplate DataType="{x:Type local:City}">
-                        <TextBlock Text="{Binding Path=CityName}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox/>
+                            <TextBlock Text="{Binding Path=CityName}"/>
+                        </StackPanel>
                     </DataTemplate>
 
                 </TreeView.Resources>
