@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+
 
 namespace WpfAppTreeView
 {
@@ -12,7 +13,7 @@ namespace WpfAppTreeView
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
-    public class TreeViewDataStruct : ViewModelBase
+    public class TreeViewDataStruct : PropertyChangedBase
     {
         // Constructor
         public TreeViewDataStruct()
@@ -20,6 +21,7 @@ namespace WpfAppTreeView
             // Initialize private members
             _myTreeItems = new ObservableCollection<Tuple<State, City>>();
             _myTreeDataStruct = new ObservableCollection<Tuple<State, List<City>>>();
+            _records = new ObservableCollection<ActualTreeViewRecord>();
         }
 
         private ObservableCollection<Tuple<State, List<City>>>? _myTreeDataStruct;
@@ -52,7 +54,7 @@ namespace WpfAppTreeView
                 from items in _myTreeItems
                 select items.Item1.StateName;
 
-            // I could only use Distinct() with string types. I must conduct further research
+            // I could only use Distinct() with string types. I will conduct further research
             // on how to accomplish using Distinct() with a custom class or object.
             IEnumerable<string> temp = statesQuery.Distinct();
 
@@ -65,61 +67,45 @@ namespace WpfAppTreeView
             }
 
 
-            
+            // Done with the States list, now on to the Cities list.
+            // For each "State" in the previous list, create another
+            // list of cities that each State is assigned to. 
             foreach (var itemState in statesList)
             {
-                var tempCities = new List<City>();
-                foreach (var itemTree in _myTreeItems)
+                if (_myTreeItems != null)
                 {
-                    if (itemState.StateName  ==  itemTree.Item1.StateName)
+                    var tempCities = new List<City>();
+                    foreach (var itemTree in _myTreeItems)
                     {
-                        tempCities.Add(itemTree.Item2);
+                        if (itemState.StateName == itemTree.Item1.StateName)
+                        {
+                            tempCities.Add(itemTree.Item2);
+                        }
                     }
-                }
 
-                _myTreeDataStruct?.Add(new Tuple<State, List<City>>(itemState, tempCities));
+                    // Add the new tuple to the data struct
+                    _myTreeDataStruct?.Add(new Tuple<State, List<City>>(itemState, tempCities));
+                    _records.Add( new ActualTreeViewRecord(itemState, new ObservableCollection<City>(tempCities)) );
+                }
             }
 
         }
-    }
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
 
 
 
 
 
-
-
-
-
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    public class City : ViewModelBase
-    {
-        public City(string cityname)
+        private ObservableCollection<ActualTreeViewRecord> _records;
+        public ObservableCollection<ActualTreeViewRecord> Records
         {
-            CityName = cityname;
-        }
-
-        private string? _strCityName = string.Empty;
-        public string? CityName
-        {
-            get => _strCityName;
+            get => _records;
             set
             {
-                _strCityName = value;
-                OnPropertyChanged("CityName");
+                _records = value;
+                OnPropertyChanged("Records");
             }
         }
+
     }
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
@@ -131,18 +117,21 @@ namespace WpfAppTreeView
 
 
 
+    public class ActualTreeViewRecord : PropertyChangedBase
+    {
+        public ActualTreeViewRecord(State state_arg, ObservableCollection<City> cities_arg)
+        {
+            StateRecord = state_arg;
+            CitiesSubRecords = cities_arg;
+        }
+
+        public State StateRecord { get; set; }
+        public ObservableCollection<City> CitiesSubRecords { get; set; }
+    }
 
 
 
-
-
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    //----------------------------------------------------------------------------
-    public class State : ViewModelBase
+    public class State : PropertyChangedBase
     {
         public State(string state)
         {
@@ -159,10 +148,49 @@ namespace WpfAppTreeView
                 OnPropertyChanged("StateName");
             }
         }
+
     }
+
+
+
+    public class City : PropertyChangedBase
+    {
+        public City(string cityname)
+        {
+            CityName = cityname;
+        }
+
+        private string? _strCityName = string.Empty;
+        public string? CityName
+        {
+            get => _strCityName;
+            set
+            {
+                _strCityName = value;
+                OnPropertyChanged("CityName");
+            }
+        }
+
+    }
+
+
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
+    // "Notify Property has Changed" Base class.  Classes Inherits from this class
+    public class PropertyChangedBase : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public void OnPropertyChanged(string propname)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propname));
+            }
+        }
+    }
+    // "Notify Property has Changed" Base class.  Classes Inherits from this class
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------

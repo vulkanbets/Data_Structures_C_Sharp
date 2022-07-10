@@ -1,59 +1,18 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
 // For De-Bugging
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
 
+
 namespace WpfAppTreeView
 {
-    public class WpfAppTreeViewModel : ViewModelBase
+    public class WpfAppTreeViewModel : PropertyChangedBase
     {
-        //--------------
-        // Constructor
-        public WpfAppTreeViewModel()
-        {
-            _treeViewItemsStruct = new TreeViewDataStruct();
-            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("San Diego")) );
-            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("Sacramento")) );
-            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("Carlsbad")) );
-            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Orlando")) );
-            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Miami")) );
-            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Jacksonville")) );
-            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("North Carolina"), new City("Raleigh")) );
-            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("North Carolina"), new City("Jacksonville")) );
 
-            // Create the TreeView Data Structure
-            _treeViewItemsStruct.CompileTreeStructure();
-
-
-            // Print-out test variables to see test functionality
-            //Task.Run(() =>
-            //{
-            //    while (true)
-            //    {
-            //        if (_treeViewItemsStruct.MyTreeItems != null)
-            //        {
-            //            Trace.WriteLine("\n");
-            //            foreach (var itemState in _treeViewItemsStruct.MyTreeDataStruct)
-            //            {
-            //                Trace.WriteLine("");
-            //                Trace.Write(itemState.Item1.StateName);
-            //                foreach (var itemCity in itemState.Item2)
-            //                {
-            //                    Trace.WriteLine("");
-            //                    Trace.Write(" |-- ");
-            //                    Trace.Write(itemCity.CityName);
-            //                }
-            //            }
-            //            Trace.WriteLine("\n");
-            //        }
-
-            //        Thread.Sleep(1250);
-            //    }
-            //});
-        }
-        // End Constructor
+        //-----------------
+        // Private members
         //-----------------
 
         // View
@@ -73,6 +32,43 @@ namespace WpfAppTreeView
             _view.Show();
         }
 
+
+
+
+        //--------------
+        // Constructor
+        //--------------
+        public WpfAppTreeViewModel()
+        {
+            // Initialize private members
+            _treeViewItemsStruct = new TreeViewDataStruct();
+            _records = new ObservableCollection<ActualTreeViewRecord>();
+
+            // The lines below these comments should never be part of the ViewModel, but were
+            // needed to test this TreeView Data Structure.  These lines are just for testing purposes
+            //----------------------------------------------------------------------------------------------------
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("San Diego")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("Sacramento")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("California"), new City("Carlsbad")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Orlando")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Miami")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("Florida"), new City("Jacksonville")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("North Carolina"), new City("Raleigh")) );
+            _treeViewItemsStruct.MyTreeItems?.Add( new Tuple<State, City>(new State("North Carolina"), new City("Jacksonville")) );
+
+            // Create the TreeView Data Structure
+            _treeViewItemsStruct.CompileTreeStructure();
+            _records = _treeViewItemsStruct.Records;
+            //----------------------------------------------------------------------------------------------------
+            // The lines above these comments should never be part of the ViewModel, but were
+            // needed to test this TreeView Data Structure.  These lines are just for testing purposes
+        }
+        //-----------------
+        // End Constructor
+        //-----------------
+
+
+
         private TreeViewDataStruct? _treeViewItemsStruct;
         public TreeViewDataStruct? TreeViewItemsStruct
         {
@@ -83,32 +79,19 @@ namespace WpfAppTreeView
                 OnPropertyChanged("TreeViewItemsList");
             }
         }
-    }
 
 
-
-
-
-
-
-    //-----------------------------------------------------------
-    //-----------------------------------------------------------
-    //-----------------------------------------------------------
-    // ViewModel Base class.  ViewModel Inherits from this class
-    public class ViewModelBase : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void OnPropertyChanged(string propname)
+        private ObservableCollection<ActualTreeViewRecord> _records;
+        public ObservableCollection<ActualTreeViewRecord> Records
         {
-            if (PropertyChanged != null)
+            get => _records;
+            set
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propname));
+                _records = value;
+                OnPropertyChanged("Records");
             }
         }
+
     }
-    // ViewModel Base class.  ViewModel Inherits from this class
-    //-----------------------------------------------------------
-    //-----------------------------------------------------------
-    //-----------------------------------------------------------
+
 }

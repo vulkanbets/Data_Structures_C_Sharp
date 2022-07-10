@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Height="450" Width="800"
         MinHeight="250" MinWidth="425">
+    
+    <Window.DataContext>
+        <local:WpfAppTreeViewModel/>
+    </Window.DataContext>
 
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
@@ -24,15 +28,21 @@
         
         <!-- TreeView inside DockPanel -->
         <DockPanel Grid.Row="1" Grid.Column="0">
-            <TreeView>
+            <TreeView ItemsSource="{Binding Records, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
                 <TreeView.Resources>
-                    <HierarchicalDataTemplate DataType="{x:Type local:WpfAppTreeViewModel}" ItemsSource="{Binding TreeViewItemsStruct}">
-                        <!--<TextBlock Text="{Binding Path=}" />-->
+
+                    <HierarchicalDataTemplate DataType = "{x:Type local:ActualTreeViewRecord}" ItemsSource="{Binding CitiesSubRecords}">
+                        <TextBlock Text="{Binding Path=StateRecord.StateName}"/>
                     </HierarchicalDataTemplate>
-                    <DataTemplate DataType="{x:Type local:TreeViewDataStruct}" >
-                        <!--<TextBlock Text="{Binding Path=Name}" />-->
+
+                    <DataTemplate DataType="{x:Type local:City}">
+                        <TextBlock Text="{Binding Path=CityName}"/>
                     </DataTemplate>
+
                 </TreeView.Resources>
+
+
             </TreeView>
         </DockPanel>
         
