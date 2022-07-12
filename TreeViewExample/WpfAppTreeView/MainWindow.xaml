@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppTreeView"
+        
         mc:Ignorable="d"
         Height="450" Width="800"
         MinHeight="250" MinWidth="425">
@@ -34,14 +35,16 @@
 
                     <HierarchicalDataTemplate DataType = "{x:Type local:ActualTreeViewRecord}" ItemsSource="{Binding CitiesSubRecords}">
                         <StackPanel Orientation="Horizontal">
-                            <CheckBox/>
+                            <CheckBox IsChecked="{Binding Path=StateRecord.IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Command="{Binding StateRecord.checkBoxCheckedCommand}"/>
                             <TextBlock Text="{Binding Path=StateRecord.StateName}"/>
                         </StackPanel>
                     </HierarchicalDataTemplate>
 
                     <DataTemplate DataType="{x:Type local:City}">
                         <StackPanel Orientation="Horizontal">
-                            <CheckBox/>
+                            <CheckBox IsChecked="{Binding Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Command=""/>
                             <TextBlock Text="{Binding Path=CityName}"/>
                         </StackPanel>
                     </DataTemplate>

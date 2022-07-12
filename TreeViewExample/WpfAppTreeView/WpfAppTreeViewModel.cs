@@ -18,6 +18,12 @@ namespace WpfAppTreeView
         // View
         private MainWindow? _view;
 
+
+
+        //-----------------
+        // Public members
+        //-----------------
+
         // Show the View
         public void showView()
         {
@@ -31,8 +37,6 @@ namespace WpfAppTreeView
             // Show the window
             _view.Show();
         }
-
-
 
 
         //--------------

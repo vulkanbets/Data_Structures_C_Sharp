@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -125,6 +127,7 @@ namespace WpfAppTreeView
         public State(string state)
         {
             StateName = state;
+            checkBoxCheckedCommand = new RelayCommand(o => checkBoxChecked());
         }
 
         private string? _strStateName = string.Empty;
@@ -149,6 +152,12 @@ namespace WpfAppTreeView
             }
         }
 
+        public RelayCommand checkBoxCheckedCommand { get; set; }
+        private void checkBoxChecked()
+        {
+            MessageBox.Show("Checkbox checked");
+        }
+
     }
 
 
@@ -158,6 +167,7 @@ namespace WpfAppTreeView
         public City(string cityname)
         {
             CityName = cityname;
+            
         }
 
         private string? _strCityName = string.Empty;
@@ -188,7 +198,7 @@ namespace WpfAppTreeView
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
-    // "Notify Property has Changed" Base class.  Classes Inherits from this class
+    // "Notify Property has Changed" Base class.  Classes Inherit from this class
     public class PropertyChangedBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -201,8 +211,42 @@ namespace WpfAppTreeView
             }
         }
     }
-    // "Notify Property has Changed" Base class.  Classes Inherits from this class
+    // "Notify Property has Changed" Base class.  Classes Inherit from this class
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
+
+
+
+
+
+    //------------------------------------------------------------------------------------
+    // Relay command interface taken from Stack Overflow
+    public class RelayCommand : ICommand
+    {
+        private Action<object> execute;
+        private Func<object, bool> canExecute;
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        {
+            this.execute = execute;
+            this.canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return this.canExecute == null || this.canExecute(parameter);
+        }
+
+        public void Execute(object parameter)
+        {
+            this.execute(parameter);
+        }
+    }
 }
